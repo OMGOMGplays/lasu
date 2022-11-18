@@ -1,0 +1,49 @@
+{
+  "Title": "Launch Survivor",
+  "Type": "game",
+  "Org": "oop",
+  "Ident": "lasu",
+  "Tags": "",
+  "Schema": 1,
+  "HasAssets": true,
+  "AssetsPath": "",
+  "ResourcePaths": [
+    "/ui/*"
+  ],
+  "HasCode": true,
+  "CodePath": "/code/",
+  "RootNamespace": null,
+  "Metadata": {
+    "MaxPlayers": 64,
+    "MinPlayers": 1,
+    "GameNetworkType": "Multiplayer",
+    "MapSelect": "Unrestricted",
+    "MapList": [
+      "facepunch.flatgrass"
+    ],
+    "RankType": "Best",
+    "PerMapRanking": false,
+    "LeaderboardType": "None",
+    "ProjectTemplate": null,
+    "ParentPackage": "",
+    "GameCategory": "None",
+    "ControlModes": {
+      "Keyboard": true
+    },
+    "Compiler": {
+      "RootNamespace": "Sandbox",
+      "DefineConstants": "SANDBOX;ADDON;DEBUG",
+      "NoWarn": "1701;1702;1591;"
+    },
+    "PackageSettings": [
+      {
+        "Choices": [],
+        "ConVarName": "",
+        "DisplayName": "New Setting..."
+      }
+    ],
+    "DefaultLeaderboards": [
+      "Longest Survived Time"
+    ]
+  }
+}
