@@ -98,19 +98,6 @@ namespace LASU
 			if (CurrGameState == GameStates.Done && CurrentRound < MaxRound) 
 			{
 				StartRound();
-
-				bool hasAlreadyRoundedPlus = false;
-
-				if (hasAlreadyRoundedPlus == false)
-				{
-					CurrentRound++;
-					hasAlreadyRoundedPlus = true;
-				}
-				else 
-				{
-					SetGameState(GameStates.Ongoing);
-					return;
-				}
 			}
 
 			if (CurrGameState == GameStates.Done && CurrentRound == MaxRound) 
@@ -177,6 +164,8 @@ namespace LASU
 		public void StartRound() 
 		{
 			ResetPlayerPositions();
+			CurrentRound += 1;
+			return;
 		}
 
 		public void ResetPlayerPositions() 
