@@ -63,7 +63,14 @@ namespace LASU
 
 			LASUGame.Instance.PlayersLeft--;
 
-			IsSpectating = true;
+			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.WaitingForPlayers || LASUGame.Instance.CurrGameState == LASUGame.GameStates.Starting) 
+			{
+				IsSpectating = false;
+			}
+			else 
+			{
+				IsSpectating = true;
+			}
 		}
 
 		public override void Simulate( Client cl )
