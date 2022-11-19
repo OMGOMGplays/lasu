@@ -100,7 +100,7 @@ namespace LASU
 				StartRound();
 			}
 
-			if (CurrGameState == GameStates.Done && CurrentRound == MaxRound) 
+			if (CurrGameState == GameStates.Done && CurrentRound >= MaxRound) 
 			{
 				TimeUntilSwitchToMapVote -= Time.Delta;
 
@@ -164,8 +164,6 @@ namespace LASU
 		public void StartRound() 
 		{
 			ResetPlayerPositions();
-			CurrentRound += 1;
-			return;
 		}
 
 		public void ResetPlayerPositions() 

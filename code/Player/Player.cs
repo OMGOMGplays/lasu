@@ -63,13 +63,15 @@ namespace LASU
 
 			LASUGame.Instance.PlayersLeft--;
 
-			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.WaitingForPlayers || LASUGame.Instance.CurrGameState == LASUGame.GameStates.Starting) 
+			var currGameState = LASUGame.Instance.CurrGameState;
+
+			switch (currGameState) // Det finns säkert en bättre väg att göra detta, jag gillar bara att använda switch för de ser coola ut.
 			{
-				IsSpectating = false;
-			}
-			else 
-			{
-				IsSpectating = true;
+				case LASUGame.GameStates.Done: IsSpectating = false; break;
+				case LASUGame.GameStates.MapVoting: IsSpectating = false; break;
+				case LASUGame.GameStates.Ongoing: IsSpectating = true; break;
+				case LASUGame.GameStates.Starting: IsSpectating = false; break;
+				case LASUGame.GameStates.WaitingForPlayers: IsSpectating = false; break;
 			}
 		}
 
