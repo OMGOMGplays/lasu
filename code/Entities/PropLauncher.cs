@@ -52,7 +52,7 @@ namespace LASU
 				if (TimeSinceLastLaunch >= randomTime) 
 				{
 					TimeSinceLastLaunch = 0.0f;
-					randomTime = Rand.Float(5.0f, 15.0f);
+					// randomTime = Rand.Float(5.0f, 15.0f);
 
 					LaunchModel();
 				}
