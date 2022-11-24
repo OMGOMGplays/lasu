@@ -10,6 +10,7 @@ namespace LASU
 		public float TimeSinceSpawned;
 
 		public bool IsSpectating;
+		public bool CanMove;
 
 		public LASUPlayer() 
 		{
@@ -55,6 +56,8 @@ namespace LASU
 				Controller = new NoclipController();
 				CameraMode = new ThirdPersonCamera();
 			}
+
+			CanMove = true;
 		}
 
 		public override void OnKilled()
@@ -82,6 +85,11 @@ namespace LASU
 			if (LifeState == LifeState.Alive)
 			{
 				TimeSinceSpawned += Time.Delta;
+			}
+
+			if (CanMove == false) 
+			{
+				Velocity = 0;
 			}
 
 			// Log.Info($"Player {Client.Name}'s Time Since Spawned is: {TimeSinceSpawned}.");

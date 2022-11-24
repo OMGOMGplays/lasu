@@ -117,6 +117,11 @@ namespace LASU
 			{
 				TimeUntilSwitchToMapVote -= Time.Delta;
 
+				foreach (var player in All.OfType<LASUPlayer>()) 
+				{
+					player.CanMove = false;
+				}
+
 				Log.Info($"Switching to map vote in {TimeUntilSwitchToMapVote} seconds!");
 
 				ShowScoreboard();

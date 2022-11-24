@@ -12,8 +12,8 @@ namespace LASU
 	[Library("lasu_proplauncher")]
 	public partial class PropLauncher : ModelEntity
 	{
-		[Property, Display(Name = "Launch Speed", GroupName = "General", Description = "The speed of which the launcher should shoot its models Recommended speed is the default speed (200)")] // Beskrivningen ser lite konstigt ut utan punkter, men ser bättre ut i Hammer.
-		public float LaunchSpeed {get; set;} = 200.0f;
+		[Property, Display(Name = "Launch Speed", GroupName = "General", Description = "The speed of which the launcher should shoot its models Recommended speed is the default speed")] // Beskrivningen ser lite konstigt ut utan punkter, men ser bättre ut i Hammer.
+		public float LaunchSpeed {get; set;} = 2000.0f;
 
 		// En jälvar lång lista, men jag tror nog inte att jag kan göra det något bättre.
 
@@ -42,10 +42,9 @@ namespace LASU
 			base.Spawn();
 		}
 
-		public override void Simulate( Client cl )
+		[Event.Tick.Server]
+		public void LauncherSimulate()
 		{
-			base.Simulate(cl);
-
 			var randomTime = Rand.Float(5.0f, 15.0f);
 
 			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Ongoing)
@@ -75,7 +74,8 @@ namespace LASU
 				6 => Model6,
 				_ => Model1,
 			};
-			Log.Info("Launching Model!");
+
+			Log.Info($"Launching {modelToLaunch}!");
 
 			var model = new ModelEntity();
 			model.SetModel(modelToLaunch);
