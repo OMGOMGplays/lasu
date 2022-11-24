@@ -48,12 +48,15 @@ namespace LASU
 
 			var randomTime = Rand.Float(5.0f, 15.0f);
 
-			if (TimeSinceLastLaunch >= randomTime) 
+			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Ongoing)
 			{
-				TimeSinceLastLaunch = 0.0f;
-				randomTime = Rand.Float(5.0f, 15.0f);
+				if (TimeSinceLastLaunch >= randomTime) 
+				{
+					TimeSinceLastLaunch = 0.0f;
+					randomTime = Rand.Float(5.0f, 15.0f);
 
-				LaunchModel();
+					LaunchModel();
+				}
 			}
 
 			Log.Info($"Entity: {Name}'s TimeSinceLastLaunch is: {TimeSinceLastLaunch}.");

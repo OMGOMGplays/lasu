@@ -16,7 +16,9 @@ namespace LASU
 		public float TimeUntilSwitchToMapVote = 45.0f;
 		public float TimeUntilSwitchMap = 50.0f;
 
-		public int CurrentRound;
+		public TimeSince TimeSinceAddedRound;
+
+		public int CurrentRound = 0;
 		public int MaxRound = 3;
 
 		public int AmountOfPlayers;
@@ -90,14 +92,25 @@ namespace LASU
 				}
 			}
 
-			if (PlayersLeft == 1 && CurrGameState == GameStates.Ongoing || PlayersLeft == 0 && CurrGameState == GameStates.Ongoing) 
+			if (CurrGameState == GameStates.Ongoing) 
 			{
-				SetGameState(GameStates.Done);
-			}
+				if (PlayersLeft == 0 || PlayersLeft == 1) 
+				{
+					if (CurrentRound < MaxRound && TimeSinceAddedRound >= 4f) 
+					{
+						ResetPlayerPositions();
 
-			if (CurrGameState == GameStates.Done && CurrentRound < MaxRound) 
-			{
-				StartRound();
+						AddRound();
+
+						Log.Info($"Current round is now: {CurrentRound}. Match is not done.");
+					}
+					else if (CurrentRound >= MaxRound) 
+					{
+						SetGameState(GameStates.Done);
+
+						Log.Info($"Current round is now: {CurrentRound}. Match is done.");
+					}
+				}
 			}
 
 			if (CurrGameState == GameStates.Done && CurrentRound >= MaxRound) 
@@ -126,7 +139,8 @@ namespace LASU
 
 				if (TimeUntilSwitchMap <= 0.0f) 
 				{
-					TimeUntilSwitchMap = 0.0f;
+					// Ändra banan
+					return;
 				}
 
 				OpenMapSwitchMenu();
@@ -164,6 +178,15 @@ namespace LASU
 		public void StartRound() 
 		{
 			ResetPlayerPositions();
+		}
+
+		public void AddRound() 
+		{
+			TimeSinceAddedRound = 0;
+
+			CurrentRound++;
+
+			return;
 		}
 
 		public void ResetPlayerPositions() 
