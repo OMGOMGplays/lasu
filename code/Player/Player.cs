@@ -12,6 +12,8 @@ namespace LASU
 		public bool IsSpectating;
 		public bool CanMove;
 
+		private DamageInfo LastDamage;
+
 		public LASUPlayer() 
 		{
 		}
@@ -25,17 +27,19 @@ namespace LASU
 		{
 			base.Respawn();
 
+			SetModel("models/citizen/citizen.vmdl");
+
+			Clothing.DressEntity(this);
+
+			Animator = new StandardPlayerAnimator();
+			CameraMode = new ThirdPersonCamera();
+
 			if (!IsSpectating) 
 			{
-				SetModel("models/citizen/citizen.vmdl");
-
-				Clothing.DressEntity(this);
-
 				EnableAllCollisions = true;
+				EnableDrawing = true;
 
-				Animator = new StandardPlayerAnimator();
 				Controller = new WalkController();
-				CameraMode = new ThirdPersonCamera();
 
 				LASUGame.Instance.PlayersLeft++;
 
@@ -44,20 +48,18 @@ namespace LASU
 
 			if (IsSpectating) 
 			{
-				SetModel("models/citizen/citizen.vmdl");
-
-				Clothing.DressEntity(this);
-
 				RenderColor = new Color(255, 255, 255, 0.5f);
 
 				EnableAllCollisions = false;
+				EnableDrawing = true;
 
-				Animator = new StandardPlayerAnimator();
 				Controller = new NoclipController();
-				CameraMode = new ThirdPersonCamera();
 			}
 
-			CanMove = true;
+			if (LASUGame.Instance.CurrGameState != LASUGame.GameStates.Done || LASUGame.Instance.CurrGameState != LASUGame.GameStates.MapVoting) 
+			{
+				CanMove = true;
+			}
 		}
 
 		public override void OnKilled()
@@ -65,6 +67,15 @@ namespace LASU
 			base.OnKilled();
 
 			LASUGame.Instance.PlayersLeft--;
+
+			BecomeRagdollOnClient(Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, LastDamage.BoneIndex);
+
+			Controller = null;
+
+			EnableAllCollisions = false;
+			EnableDrawing = false;
+
+			CameraMode = new SpectateRagdollCamera();
 
 			var currGameState = LASUGame.Instance.CurrGameState;
 

@@ -81,7 +81,7 @@ namespace LASU
 
 			if (CurrGameState == GameStates.Starting) 
 			{
-				Log.Info($"Starting the game in {TimeUntilStart} seconds!");
+				// Log.Info($"Starting the game in {TimeUntilStart} seconds!");
 
 				TimeUntilStart -= Time.Delta; // Fungerar detta??? - Ja!!!
 
@@ -122,7 +122,7 @@ namespace LASU
 					player.CanMove = false;
 				}
 
-				Log.Info($"Switching to map vote in {TimeUntilSwitchToMapVote} seconds!");
+				// Log.Info($"Switching to map vote in {TimeUntilSwitchToMapVote} seconds!");
 
 				ShowScoreboard();
 
@@ -139,7 +139,7 @@ namespace LASU
 				{
 					TimeUntilSwitchMap -= Time.Delta;
 
-					Log.Info($"In {TimeUntilSwitchMap} seconds the map will switch!");
+					// Log.Info($"In {TimeUntilSwitchMap} seconds the map will switch!");
 				}
 
 				if (TimeUntilSwitchMap <= 0.0f) 

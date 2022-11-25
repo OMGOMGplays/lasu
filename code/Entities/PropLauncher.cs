@@ -46,7 +46,7 @@ namespace LASU
 		[Event.Tick.Server]
 		public void LauncherSimulate()
 		{
-			var randomTime = Rand.Float(5.0f, 15.0f);
+			var randomTime = Rand.Float(10.0f, 15.0f);
 
 			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Ongoing)
 			{
