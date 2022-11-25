@@ -98,7 +98,7 @@ namespace LASU
 				{
 					if (CurrentRound < MaxRound && TimeSinceAddedRound >= 4f) 
 					{
-						ResetPlayerPositions();
+						StartRound();
 
 						AddRound();
 
@@ -183,6 +183,11 @@ namespace LASU
 		public void StartRound() 
 		{
 			ResetPlayerPositions();
+
+			foreach (var physicsProp in All.OfType<LASUPhysicsEntity>()) 
+			{
+				physicsProp.Reset();
+			}
 		}
 
 		public void AddRound() 
@@ -203,6 +208,8 @@ namespace LASU
 
 				player.IsSpectating = false;
 				player.Transform = randomSpawnPoint.Transform;
+
+				player.Velocity = 0;
 			}
 		}
 
