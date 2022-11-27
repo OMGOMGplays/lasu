@@ -151,7 +151,7 @@ namespace LASU
 
 			if (!CheckMinPlayerReached()) 
 			{
-				if (CurrGameState == GameStates.Ongoing || CurrGameState == GameStates.Ongoing)
+				if (CurrGameState == GameStates.Ongoing || CurrGameState == GameStates.Starting)
 				{
 					Log.Error("Not enough players to start / continue round! Canceling / restarting!");
 					Log.Info($"Time until start has been reset to: {TimeUntilStartOrigin}");
