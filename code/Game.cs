@@ -6,13 +6,13 @@ namespace LASU
 {
 	public partial class LASUGame : Game 
 	{
-		public TimeSince TimeSinceRoundStarted;
+		public TimeSince TimeSinceRoundEnded;
 
 		public GameStates CurrGameState {get; set;} = GameStates.WaitingForPlayers;
 
 		public static float TimeUntilStartOrigin = 15.0f;
 
-		public float TimeUntilStart {get; set;} = 15.0f;
+		public float TimeUntilStart = 15.0f;
 		public float TimeUntilSwitchToMapVote = 45.0f;
 		public float TimeUntilSwitchMap = 50.0f;
 
@@ -96,11 +96,9 @@ namespace LASU
 			{
 				if (PlayersLeft == 0 || PlayersLeft == 1) 
 				{
-					if (CurrentRound < MaxRound && TimeSinceAddedRound >= 4f) 
+					if (CurrentRound < MaxRound) 
 					{
 						StartRound();
-
-						AddRound();
 
 						Log.Info($"Current round is now: {CurrentRound}. Match is not done.");
 					}
@@ -151,12 +149,15 @@ namespace LASU
 				OpenMapSwitchMenu();
 			}
 
-			if (CurrGameState == GameStates.Ongoing && CheckMinPlayerReached() == false || CurrGameState == GameStates.Starting && CheckMinPlayerReached() == false) 
+			if (!CheckMinPlayerReached()) 
 			{
-				Log.Error("Not enough players to start / continue round! Canceling / restarting!");
-				Log.Info($"Time until start has been reset to: {TimeUntilStartOrigin}");
-				TimeUntilStart = TimeUntilStartOrigin;
-				SetGameState(GameStates.WaitingForPlayers);
+				if (CurrGameState == GameStates.Ongoing || CurrGameState == GameStates.Ongoing)
+				{
+					Log.Error("Not enough players to start / continue round! Canceling / restarting!");
+					Log.Info($"Time until start has been reset to: {TimeUntilStartOrigin}");
+					TimeUntilStart = TimeUntilStartOrigin;
+					SetGameState(GameStates.WaitingForPlayers);
+				}
 			} 
 		}
 
@@ -164,7 +165,7 @@ namespace LASU
 		{
 			if (CurrGameState == nextGS) 
 			{
-				Log.Error($"The current game state is already {nextGS}!!!");
+				Log.Error($"The current game state is already {nextGS}! Stopping change!");
 				return;
 			}
 
@@ -187,6 +188,11 @@ namespace LASU
 			foreach (var physicsProp in All.OfType<LASUPhysicsEntity>()) 
 			{
 				physicsProp.Reset();
+			}
+
+			if (TimeSinceAddedRound >= 4.0f)
+			{
+				AddRound();
 			}
 		}
 

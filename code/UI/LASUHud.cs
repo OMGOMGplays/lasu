@@ -29,7 +29,8 @@ namespace LASU
 
 		public void CreateHudElements() 
 		{
-			// RootPanel.AddChild<MainHud>();
+			RootPanel.AddChild<PlayerAmount>();
+			RootPanel.AddChild<RoundCounter>();
 		}
 	}
 }
