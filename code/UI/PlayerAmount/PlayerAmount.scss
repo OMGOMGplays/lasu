@@ -14,4 +14,8 @@ PlayerAmount {
 
     right: 150px;      
     bottom: 150px;
+
+    .hidden {
+        opacity: 0;
+    }
 }

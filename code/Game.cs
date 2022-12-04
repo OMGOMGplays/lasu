@@ -10,7 +10,7 @@ namespace LASU
 
 		public GameStates CurrGameState {get; set;} = GameStates.WaitingForPlayers;
 
-		public static float TimeUntilStartOrigin = 15.0f;
+		public static float TimeUntilStartOrigin = 15.0f; // Kommer detta vara användbart? Kanske ifall jag lyckas få inställningarna fungera.
 
 		public float TimeUntilStart = 15.0f;
 		public float TimeUntilSwitchToMapVote = 45.0f;
