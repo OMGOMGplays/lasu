@@ -183,7 +183,7 @@ namespace LASU
 
 		public void StartRound() 
 		{
-			ResetPlayerPositions();
+			ResetPlayers();
 
 			foreach (var physicsProp in All.OfType<LASUPhysicsEntity>()) 
 			{
@@ -205,7 +205,7 @@ namespace LASU
 			return;
 		}
 
-		public void ResetPlayerPositions() 
+		public void ResetPlayers() 
 		{
 			foreach (var player in All.OfType<LASUPlayer>()) 
 			{

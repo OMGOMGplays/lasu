@@ -8,7 +8,7 @@ namespace LASU
 		public static void RestartRound() 
 		{
 			Instance.SetGameState(GameStates.WaitingForPlayers);
-			Instance.ResetPlayerPositions();
+			Instance.ResetPlayers();
 		}
 
 		[ConCmd.Client("lasu_forcestartround")]
