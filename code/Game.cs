@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace LASU
 {
-	public partial class LASUGame : Game 
+	public partial class LASUGame : GameManager
 	{
 		public TimeSince TimeSinceRoundEnded;
 

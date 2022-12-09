@@ -6,11 +6,20 @@ namespace LASU
 {
 	public partial class RoundCounter : Panel 
 	{
+		LASUGame game;
+		int Round;
+
 		public RoundCounter() 
 		{
 			StyleSheet.Load("ui/roundcounter/RoundCounter.scss");
 
-			Add.Label("Round " + LASUGame.Instance.CurrentRound, "counter");
+			UpdateRoundCounter();
 		}
+
+		public void UpdateRoundCounter()
+	    {
+    	    game.GetCurrentRound(Round); // Set the round number here
+        	Add.Label("Round " + Round, "counter");
+	    }
 	}
 }

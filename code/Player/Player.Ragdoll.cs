@@ -5,7 +5,7 @@ namespace LASU
 	partial class LASUPlayer 
 	{
 		[ClientRpc]
-		private void BecomeRagdollOnClient( Vector3 velocity, DamageFlags damageFlags, Vector3 forcePos, Vector3 force, int bone )
+		private void BecomeRagdollOnClient( Vector3 velocity, Vector3 forcePos, Vector3 force, int bone, bool impulse, bool blast )
 		{
 			var ent = new ModelEntity();
 			ent.Tags.Add( "ragdoll", "solid", "debris" );
@@ -41,8 +41,7 @@ namespace LASU
 				clothing.CopyMaterialGroup( e );
 			}
 
-			if ( damageFlags.HasFlag( DamageFlags.Bullet ) ||
-				damageFlags.HasFlag( DamageFlags.PhysicsImpact ) )
+			if ( impulse )
 			{
 				PhysicsBody body = bone > 0 ? ent.GetBonePhysicsBody( bone ) : null;
 
@@ -56,7 +55,7 @@ namespace LASU
 				}
 			}
 
-			if ( damageFlags.HasFlag( DamageFlags.Blast ) )
+			if ( blast )
 			{
 				if ( ent.PhysicsGroup != null )
 				{

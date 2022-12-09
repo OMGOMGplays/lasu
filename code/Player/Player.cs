@@ -31,9 +31,6 @@ namespace LASU
 
 			Clothing.DressEntity(this);
 
-			Animator = new StandardPlayerAnimator();
-			CameraMode = new ThirdPersonCamera();
-
 			if (!IsSpectating) 
 			{
 				EnableAllCollisions = true;
@@ -68,14 +65,12 @@ namespace LASU
 
 			LASUGame.Instance.PlayersLeft--;
 
-			BecomeRagdollOnClient(Velocity, LastDamage.Flags, LastDamage.Position, LastDamage.Force, LastDamage.BoneIndex);
+			BecomeRagdollOnClient( Velocity, LastDamage.Position, LastDamage.Force, LastDamage.BoneIndex, LastDamage.HasTag( "bullet" ), LastDamage.HasTag( "blast" ) );
 
 			Controller = null;
 
 			EnableAllCollisions = false;
 			EnableDrawing = false;
-
-			CameraMode = new SpectateRagdollCamera();
 
 			var currGameState = LASUGame.Instance.CurrGameState;
 
