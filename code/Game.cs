@@ -205,6 +205,11 @@ namespace LASU
 			return;
 		}
 
+		public void GetCurrentRound(int roundNumber) 
+		{
+			CurrentRound = roundNumber;
+		}
+
 		public void ResetPlayers() 
 		{
 			foreach (var player in All.OfType<LASUPlayer>()) 
