@@ -19,5 +19,11 @@ namespace LASU
 				Instance.SetGameState(GameStates.Starting);
 			}
 		}
+
+		[ConCmd.Client("lasu_resetprops")]
+		public static void ResetPropsCommand() 
+		{
+			Instance.ResetProps();
+		}
 	}
 }

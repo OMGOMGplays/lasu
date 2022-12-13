@@ -13,7 +13,7 @@ namespace LASU
 		public Vector3 SpawnPosition {get; set;}
 		public Rotation SpawnRotation {get; set;}
 
-		public TimeSince TimeSinceLastReset;
+		public float TimeSinceLastReset;
 
 		public override void Spawn()
 		{
@@ -21,8 +21,6 @@ namespace LASU
 
 			PhysicsEnabled = true;
 			UsePhysicsCollision = true;
-			EnableHideInFirstPerson = true;
-			EnableShadowInFirstPerson = true;
 			Tags.Add( "prop", "solid" );
 
 			SetupPhysics();
@@ -38,14 +36,18 @@ namespace LASU
 				return;
 		}
 
+		public override void Simulate( IClient cl )
+		{
+			base.Simulate( cl );
+
+			if (TimeSinceLastReset <= 2.5f) 
+			{
+				TimeSinceLastReset += Time.Delta;
+			}
+		}
+
 		public void Reset() 
 		{
-			PhysicsEnabled = false;
-
-			if (TimeSinceLastReset >= 2.5f) 
-			{
-				PhysicsEnabled = true;
-			}
 
 			TimeSinceLastReset = 0;
 

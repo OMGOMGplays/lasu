@@ -10,7 +10,7 @@ namespace LASU
 
 		public PlayerAmount() 
 		{
-			StyleSheet.Load("ui/playeramount/PlayerAmount.scss");
+			StyleSheet.Load("ui/PlayerAmount.scss");
 
 			Add.Label(PL + " / " + AOP, "playersleft");
 		}
@@ -18,9 +18,6 @@ namespace LASU
 		public override void Tick() 
 		{
 			base.Tick();
-
-			PL = LASUGame.Instance.PlayersLeft;
-			AOP = LASUGame.Instance.AmountOfPlayers;
 		}
 	}
 }

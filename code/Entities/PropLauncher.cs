@@ -46,7 +46,7 @@ namespace LASU
 		[Event.Tick.Server]
 		public void LauncherSimulate()
 		{
-			var randomTime = Rand.Float(10.0f, 15.0f);
+			var randomTime = Game.Random.Float(7.0f, 15.0f);
 
 			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Ongoing)
 			{
@@ -69,7 +69,7 @@ namespace LASU
 
 		public void LaunchModel() 
 		{
-			var modelToLaunchRand = Rand.Int(1, 6);
+			var modelToLaunchRand = Game.Random.Int(1, 6);
 			string modelToLaunch = modelToLaunchRand switch
 			{
 				1 => Model1,

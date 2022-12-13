@@ -8,7 +8,7 @@ namespace LASU
 	{
 		public TimeSince TimeSinceRoundEnded;
 
-		public GameStates CurrGameState {get; set;} = GameStates.WaitingForPlayers;
+		[Net] public GameStates CurrGameState {get; set;} = GameStates.WaitingForPlayers;
 
 		public static float TimeUntilStartOrigin = 15.0f; // Kommer detta vara användbart? Kanske ifall jag lyckas få inställningarna fungera.
 
@@ -18,24 +18,24 @@ namespace LASU
 
 		public TimeSince TimeSinceAddedRound;
 
-		public int CurrentRound = 0;
+		[Net] public int CurrentRound {get; set;} = 0;
 		public int MaxRound = 3;
 
-		public int AmountOfPlayers;
-		public int MinAmountOfPlayers = 2;
-		public int PlayersLeft;
+		[Net] public int AmountOfPlayers {get; set;}
+		private int MinAmountOfPlayers = 2;
+		[Net] public int PlayersLeft {get; set;}
 
 		public static LASUGame Instance => Current as LASUGame;
 
 		public LASUGame() 
 		{
-			if (IsClient) 
+			if (Game.IsServer) 
 			{
 				_ = new LASUHud();
 			}
 		}
 
-		public override void ClientJoined( Client cl )
+		public override void ClientJoined( IClient cl )
 		{
 			base.ClientJoined( cl );
 
@@ -54,7 +54,7 @@ namespace LASU
 			Log.Info($"Player {cl.Name} has joined! Current amount of players is now: {AmountOfPlayers}!");
 		}
 
-		public override void ClientDisconnect( Client cl, NetworkDisconnectionReason reason )
+		public override void ClientDisconnect( IClient cl, NetworkDisconnectionReason reason )
 		{
 			base.ClientDisconnect( cl, reason );
 
@@ -63,7 +63,7 @@ namespace LASU
 			Log.Info($"Player {cl.Name} has disconnected! Reason for disconnect: {reason}. Current amount of players is now: {AmountOfPlayers}!");
 		}
 
-		public override void Simulate( Client cl )
+		public override void Simulate( IClient cl )
 		{
 			base.Simulate( cl );
 
@@ -74,9 +74,12 @@ namespace LASU
 				CheckMinPlayerReached();
 			}
 
-			if (CheckMinPlayerReached() == true && CurrGameState == GameStates.WaitingForPlayers) 
+			if (CheckMinPlayerReached() == true) 
 			{
-				SetGameState(GameStates.Starting);
+				if (CurrGameState == GameStates.WaitingForPlayers)
+				{
+					SetGameState(GameStates.Starting);
+				}
 			}
 
 			if (CurrGameState == GameStates.Starting) 
@@ -99,14 +102,10 @@ namespace LASU
 					if (CurrentRound < MaxRound) 
 					{
 						StartRound();
-
-						Log.Info($"Current round is now: {CurrentRound}. Match is not done.");
 					}
 					else if (CurrentRound >= MaxRound) 
 					{
 						SetGameState(GameStates.Done);
-
-						Log.Info($"Current round is now: {CurrentRound}. Match is done.");
 					}
 				}
 			}
@@ -185,14 +184,12 @@ namespace LASU
 		{
 			ResetPlayers();
 
-			foreach (var physicsProp in All.OfType<LASUPhysicsEntity>()) 
-			{
-				physicsProp.Reset();
-			}
+			ResetProps();
 
 			if (TimeSinceAddedRound >= 4.0f)
 			{
 				AddRound();
+				Log.Info($"Round Started! The Current Round Is: {CurrentRound}!");
 			}
 		}
 
@@ -208,6 +205,14 @@ namespace LASU
 		public void GetCurrentRound(int roundNumber) 
 		{
 			CurrentRound = roundNumber;
+		}
+
+		public void ResetProps() 
+		{
+			foreach (var physicsProp in All.OfType<LASUPhysicsEntity>()) 
+			{
+				physicsProp.Reset();
+			}
 		}
 
 		public void ResetPlayers() 

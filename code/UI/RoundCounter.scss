@@ -1,0 +1,12 @@
+RoundCounter {
+    position: absolute;
+    color: white;
+    font-family: Poppins;
+    top: 100px;
+    left: 900px;
+    opacity: 1;
+
+    .hidden {
+        opacity: 0;
+    }
+}
