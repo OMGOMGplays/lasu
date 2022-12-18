@@ -103,7 +103,6 @@ namespace LASU
 				if (!IsSpectating) 
 				{
 					IsSpectating = true;
-					Respawn();
 				}
 			}		
 		}	
@@ -136,6 +135,11 @@ namespace LASU
 				.Run();
 
 			Camera.Position = tr.EndPosition;
+
+			if (LifeState != LifeState.Alive) 
+			{
+				Camera.Position = Position;
+			}
 		}
 
 		void SimulateAnimation( PawnController controller )

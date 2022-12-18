@@ -19,7 +19,7 @@ namespace LASU
 		public TimeSince TimeSinceAddedRound;
 
 		[Net] public int CurrentRound {get; set;} = 0;
-		public int MaxRound = 3;
+		public int MaxRound = 4;
 
 		[Net] public int AmountOfPlayers {get; set;}
 		private int MinAmountOfPlayers = 2;

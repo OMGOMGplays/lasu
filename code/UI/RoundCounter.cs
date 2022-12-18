@@ -6,22 +6,17 @@ namespace LASU
 {
 	public partial class RoundCounter : Panel 
 	{
-		LASUGame game = (LASUGame)GameManager.Current;
+		private LASUGame game = (LASUGame)GameManager.Current;
 		
-		int Round;
+		private int Round;
 
 		public RoundCounter() 
 		{
 			StyleSheet.Load("ui/RoundCounter.scss");
 
-			UpdateRoundCounter();
+			Round = game.CurrentRound;
+			Add.Label("Round " + Round, "rounds"); // MaxRound is 4, but I want the UI to say the game ends at round 3.
 		}
-
-		public void UpdateRoundCounter()
-	    {
-    	    game.GetCurrentRound(Round); // Set the round number here
-        	Add.Label("Round " + Round, "counter");
-	    }
 
 		public override void Tick()
 		{

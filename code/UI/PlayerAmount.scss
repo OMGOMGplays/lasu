@@ -2,7 +2,7 @@ PlayerAmount {
     position: absolute;
     color: rgb(255, 255, 255);
     background-color: orange;
-    width: 122px;
+
 
     border: 10px;
     border-color: orange;
@@ -14,6 +14,8 @@ PlayerAmount {
 
     right: 150px;      
     bottom: 150px;
+
+    opacity: 1;
 
     .hidden {
         opacity: 0;
