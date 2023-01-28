@@ -1,23 +1,18 @@
 PlayerAmount {
     position: absolute;
-    color: rgb(255, 255, 255);
-    background-color: orange;
-
-
-    border: 10px;
-    border-color: orange;
+    color: #fff;
+    background-color: #FFBC1E;
+    border: 10px solid #FFBC1E;
     border-radius: 15px;
-
+    padding: 11px;
     font-family: Poppins;
     font-size: 50px;
     font-weight: 900; 
-
     right: 150px;      
     bottom: 150px;
-
     opacity: 1;
 
-    .hidden {
+    &.hidden {
         opacity: 0;
     }
 }

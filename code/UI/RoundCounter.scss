@@ -2,20 +2,16 @@ RoundCounter {
     position: absolute;
     color: white;
     font-family: Poppins;
-
     left: 46%;
-    
+    padding-left: 34px;
+	padding-right: 34px;
     font-size: 50px;
     font-weight: bold;
-
-    background-color: orange;
-
+    background-color: #FFBC1E;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
-
     border: 10px;
-    border-color: orange;
-
+    border-color: #FFBC1E;
     opacity: 1;
 
     .hidden {
