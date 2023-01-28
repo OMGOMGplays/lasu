@@ -12,9 +12,9 @@ namespace LASU
 
 		public static float TimeUntilStartOrigin = 15.0f; // Kommer detta vara användbart? Kanske ifall jag lyckas få inställningarna fungera.
 
-		public float TimeUntilStart = 15.0f;
-		public float TimeUntilSwitchToMapVote = 45.0f;
-		public float TimeUntilSwitchMap = 50.0f;
+		[Net] public float TimeUntilStart {get; set;} = 15.0f;
+		[Net] public float TimeUntilSwitchToMapVote {get; set;} = 45.0f;
+		[Net] public float TimeUntilSwitchMap {get; set;} = 50.0f;
 
 		public TimeSince TimeSinceAddedRound;
 
@@ -164,7 +164,7 @@ namespace LASU
 		{
 			if (CurrGameState == nextGS) 
 			{
-				Log.Error($"The current game state is already {nextGS}! Stopping change!");
+				Log.Error($"The current game state is already {nextGS}!");
 				return;
 			}
 
@@ -200,11 +200,6 @@ namespace LASU
 			CurrentRound++;
 
 			return;
-		}
-
-		public void GetCurrentRound(int roundNumber) 
-		{
-			CurrentRound = roundNumber;
 		}
 
 		public void ResetProps() 

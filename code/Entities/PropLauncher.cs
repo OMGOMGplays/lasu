@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace LASU
 {
-	[Display(Name = "Prop Launcher"), Icon("eject")]
+	[Display(Name = "Prop Launcher", Description = "Randomly and continuously shoots out one of 6 selectable models."), Icon("eject")]
 	[HammerEntity]
 	[DrawAngles]
 	[Model]
@@ -78,7 +78,7 @@ namespace LASU
 				4 => Model4,
 				5 => Model5,
 				6 => Model6,
-				_ => Model1,
+				_ => Model1
 			};
 
 			Log.Info($"Launching {modelToLaunch}!");
