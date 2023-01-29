@@ -5,24 +5,25 @@ using Sandbox.UI.Construct;
 namespace LASU 
 {
 	public partial class RoundCounter : Panel 
-	{
-		private LASUGame game = (LASUGame)GameManager.Current;
-		
+	{	
 		private int Round;
+
+		public Label RoundText;
 
 		public RoundCounter() 
 		{
 			StyleSheet.Load("ui/RoundCounter.scss");
 
-			Round = game.CurrentRound;
-			Add.Label("Round " + Round, "rounds"); // MaxRound is 4, but I want the UI to say the game ends at round 3.
+			RoundText = Add.Label("Round 0", "rounds");
 		}
 
 		public override void Tick()
 		{
 			base.Tick();
 
-			if (LASUGame.Instance.CurrGameState != LASUGame.GameStates.Ongoing) 
+			var game = LASUGame.Instance;
+
+			if (game.CurrGameState != LASUGame.GameStates.Ongoing) 
 			{
 				SetClass("hidden", true);
 			}
@@ -31,7 +32,8 @@ namespace LASU
 				SetClass("hidden", false);
 			}
 
-			// Round = game.GetCurrentRound(Round);
+			Round = game.CurrentRound;
+			RoundText.Text = $"Round {Round}";
 		}
 	}
 }

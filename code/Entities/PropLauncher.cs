@@ -36,7 +36,11 @@ namespace LASU
 
 		public TimeSince TimeSinceLastLaunch;
 
-		public int ObjectsLaunched;
+		[Property, Display(Name = "Minimum Random Launch Time", Description = "Sets the minimum of the random timer.")]
+		public float MinRandTime {get; set;} = 7.0f;
+
+		[Property, Display(Name = "Maximum Random Launch Time", Description = "Sets the maximum of the random timer.")]
+		public float MaxRandTime {get; set;} = 15.0f;
 
 		public override void Spawn()
 		{
@@ -46,7 +50,7 @@ namespace LASU
 		[Event.Tick.Server]
 		public void LauncherSimulate()
 		{
-			var randomTime = Game.Random.Float(7.0f, 15.0f);
+			var randomTime = Game.Random.Float(MinRandTime, MaxRandTime);
 
 			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Ongoing)
 			{
@@ -89,18 +93,6 @@ namespace LASU
 			model.Rotation = Rotation.LookAt(Vector3.Random.Normal);
 			model.SetupPhysicsFromModel(PhysicsMotionType.Dynamic, false);
 			model.PhysicsGroup.Velocity = Rotation.Forward * LaunchSpeed;
-
-			if (ObjectsLaunched < 2) 
-			{
-				ObjectsLaunched++;
-			}
-			else if (ObjectsLaunched >= 2) 
-			{
-				var lastModel = model;
-				lastModel.Delete();
-
-				ObjectsLaunched = 0;
-			}
 		}
 	}
 }

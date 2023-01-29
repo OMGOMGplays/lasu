@@ -6,21 +6,26 @@ namespace LASU
 {
 	public partial class LASUGame : GameManager
 	{
-		public TimeSince TimeSinceRoundEnded;
-
+		// GameStates
 		[Net] public GameStates CurrGameState {get; set;} = GameStates.WaitingForPlayers;
 
+		// TimeUntil
 		public static float TimeUntilStartOrigin = 15.0f; // Kommer detta vara användbart? Kanske ifall jag lyckas få inställningarna fungera.
 
 		[Net] public float TimeUntilStart {get; set;} = 15.0f;
 		[Net] public float TimeUntilSwitchToMapVote {get; set;} = 45.0f;
 		[Net] public float TimeUntilSwitchMap {get; set;} = 50.0f;
 
+		// TimeSince
 		public TimeSince TimeSinceAddedRound;
+		public TimeSince TimeSinceResetPlayers;
+		public TimeSince TimeSinceRoundEnded;
 
+		// Rounds
 		[Net] public int CurrentRound {get; set;} = 0;
 		public int MaxRound = 4;
 
+		// Players
 		[Net] public int AmountOfPlayers {get; set;}
 		private int MinAmountOfPlayers = 2;
 		[Net] public int PlayersLeft {get; set;}
@@ -214,13 +219,19 @@ namespace LASU
 		{
 			foreach (var player in All.OfType<LASUPlayer>()) 
 			{
-				var spawnpoint = All.OfType<SpawnPoint>();
-				var randomSpawnPoint = spawnpoint.OrderBy(x => Guid.NewGuid()).FirstOrDefault();
+				if (TimeSinceResetPlayers >= 2.5f) 
+				{
+					var spawnPoint = All
+						.OfType<SpawnPoint>()
+						.OrderBy(x => Guid.NewGuid())
+						.FirstOrDefault();
 
-				player.IsSpectating = false;
-				player.Transform = randomSpawnPoint.Transform;
-
-				player.Velocity = 0;
+					player.Transform = spawnPoint.Transform;
+					player.IsSpectating = false;
+					player.Velocity = 0;
+					
+					TimeSinceResetPlayers = 0;
+				}
 			}
 		}
 

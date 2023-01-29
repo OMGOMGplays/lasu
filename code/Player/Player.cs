@@ -98,14 +98,14 @@ namespace LASU
 				SimulateAnimation(controller);
 			}	
 
-			if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Done) 
-			{
-				if (!IsSpectating) 
-				{
-					IsSpectating = true;
-					Respawn();
-				}
-			}		
+			// if (LASUGame.Instance.CurrGameState == LASUGame.GameStates.Done) 
+			// {
+			// 	if (!IsSpectating) 
+			// 	{
+			// 		IsSpectating = true;
+			// 		Respawn();
+			// 	}
+			// }	
 		}
 	}
 }

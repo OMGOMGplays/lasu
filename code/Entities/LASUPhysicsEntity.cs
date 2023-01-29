@@ -48,7 +48,6 @@ namespace LASU
 
 		public void Reset() 
 		{
-
 			TimeSinceLastReset = 0;
 
 			Position = SpawnPosition;

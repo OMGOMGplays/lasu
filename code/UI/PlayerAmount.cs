@@ -8,16 +8,30 @@ namespace LASU
 		private int PL;
 		private int AOP;
 
+		public Label Players;
+
 		public PlayerAmount() 
 		{
 			StyleSheet.Load("ui/PlayerAmount.scss");
 
-			Add.Label(PL + " / " + AOP, "playersleft");
+			Players = Add.Label("0/0", "playersleft");
 		}
 
 		public override void Tick() 
 		{
 			base.Tick();
+
+			var game = LASUGame.Instance;
+
+			PL = game.PlayersLeft;
+			AOP = game.AmountOfPlayers;
+
+			Players.Text = $"{PL}/{AOP}";
+
+			if (game.CurrGameState == LASUGame.GameStates.Done) 
+			{
+				SetClass("hidden", true);
+			}
 		}
 	}
 }

@@ -14,7 +14,7 @@ RoundCounter {
     border-color: #FFBC1E;
     opacity: 1;
 
-    .hidden {
+    &.hidden {
         opacity: 0;
     }
 }
