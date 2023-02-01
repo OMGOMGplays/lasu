@@ -1,7 +1,7 @@
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace LASU
+namespace LASU.UI
 {
 	public class PlayerAmount : Panel 
 	{

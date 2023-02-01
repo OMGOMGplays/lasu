@@ -2,7 +2,7 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace LASU 
+namespace LASU.UI
 {
 	public partial class RoundCounter : Panel 
 	{	

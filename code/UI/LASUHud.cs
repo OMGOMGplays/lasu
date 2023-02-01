@@ -2,7 +2,7 @@ using Sandbox;
 using Sandbox.UI;
 using Sandbox.UI.Construct;
 
-namespace LASU 
+namespace LASU.UI
 {
 	public partial class LASUHud : HudEntity<RootPanel> 
 	{
@@ -31,6 +31,7 @@ namespace LASU
 		{
 			RootPanel.AddChild<PlayerAmount>();
 			RootPanel.AddChild<RoundCounter>();
+			RootPanel.AddChild<LASUScoreboard<LASUScoreboardEntry>>();
 		}
 	}
 }

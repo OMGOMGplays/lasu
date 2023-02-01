@@ -1,0 +1,69 @@
+.scoreboard
+{
+	position: absolute;
+	z-index: 100;
+    border-radius: 15px;
+	top: 8%;
+	left: 8%;
+    border: 4px solid #707070;
+	flex-direction: column;
+	font-family: Poppins;
+	font-size: 45px;
+	font-weight: 800;
+	color: white;
+	width: 85%;
+	height: 85%;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	background-color: rgba(0, 0, 0, 0.9);
+	transition: all 0.4s ease-in-out;
+	transform: translateY(500px);
+	transform-origin: 50% 50%;
+
+	&.open
+	{
+		opacity: 1;
+		transform: scale( 1 );
+	}
+
+	.name
+	{
+		flex-grow: 1;
+	}
+
+	.deaths, .ping
+	{
+		text-align: right;
+		width: 10%;
+	}
+
+	.header
+	{
+		font-weight: 800;
+		opacity: 0.8;
+		background-color: #FFBC1E;
+		border-top-right-radius: 15px;
+		border-top-left-radius: 15px;
+		height: 75%;
+		min-width: 100%;
+	}
+
+	.canvas
+	{
+		flex-direction: column;
+		min-height: 80%;
+		min-width: 100%;
+
+		.entry
+		{
+			margin-bottom: 0px;
+			padding: 1px;
+
+            border-top: 1px solid rgb(255, 255, 255);
+            border-bottom: 1px solid rgb(255, 255, 255);
+
+			color:#FFBC1E
+		}
+	}
+}

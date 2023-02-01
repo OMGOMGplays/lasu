@@ -2,6 +2,8 @@
 using System;
 using System.Linq;
 
+using LASU.UI;
+
 namespace LASU
 {
 	public partial class LASUGame : GameManager
@@ -219,19 +221,16 @@ namespace LASU
 		{
 			foreach (var player in All.OfType<LASUPlayer>()) 
 			{
-				if (TimeSinceResetPlayers >= 2.5f) 
-				{
-					var spawnPoint = All
-						.OfType<SpawnPoint>()
-						.OrderBy(x => Guid.NewGuid())
-						.FirstOrDefault();
+				var spawnPoint = All
+					.OfType<SpawnPoint>()
+					.OrderBy(x => Guid.NewGuid())
+					.FirstOrDefault();
 
-					player.Transform = spawnPoint.Transform;
-					player.IsSpectating = false;
-					player.Velocity = 0;
-					
-					TimeSinceResetPlayers = 0;
-				}
+				player.Transform = spawnPoint.Transform;
+				player.IsSpectating = false;
+				player.Velocity = 0;
+				
+				TimeSinceResetPlayers = 0;
 			}
 		}
 
