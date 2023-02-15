@@ -1,7 +1,3 @@
-using Sandbox;
-using Editor;
-using System.ComponentModel.DataAnnotations;
-
 namespace LASU
 {
 	[Display(Name = "Prop Launcher", Description = "Randomly and continuously shoots out one of 6 selectable models."), Icon("eject")]

@@ -1,7 +1,3 @@
-using Sandbox;
-using Editor;
-using System.ComponentModel.DataAnnotations;
-
 namespace LASU
 {
 	[HammerEntity]

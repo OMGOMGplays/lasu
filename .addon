@@ -36,9 +36,27 @@
     },
     "PackageSettings": [
       {
+        "DisplayType": "Float",
         "Choices": [],
-        "ConVarName": "",
-        "DisplayName": "New Setting..."
+        "ConVarName": "lasu_setstartorigin",
+        "DisplayName": "Time until the game starts",
+        "DefaultValue": "15",
+        "Description": "Sets the time it takes until the match starts.",
+        "Group": "Time Untils",
+        "Minimum": 5,
+        "Maximum": 60,
+        "Step": 1
+      },
+      {
+        "DisplayType": "Integer",
+        "Choices": [],
+        "ConVarName": "lasu_roundsuntilover",
+        "DisplayName": "Rounds until the game is over",
+        "DefaultValue": "4.39819",
+        "Description": "Sets the minimum rounds needed to make the game be over.",
+        "Group": "Rounds",
+        "Minimum": 2,
+        "Maximum": 10
       }
     ],
     "DefaultLeaderboards": [
@@ -93,6 +111,9 @@
           "r": "Collide"
         }
       ]
-    }
+    },
+    "GeneralExtensions": false,
+    "TargettedExtensions": true,
+    "ExtensionApiVersion": 1001
   }
 }

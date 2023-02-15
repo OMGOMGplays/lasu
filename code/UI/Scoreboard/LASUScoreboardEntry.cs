@@ -1,9 +1,3 @@
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System;
-using System.Collections.Generic;
-
 namespace LASU.UI
 {
 	public partial class LASUScoreboardEntry : Panel 
@@ -11,6 +5,7 @@ namespace LASU.UI
 		public IClient Client;
 
 		public Label PlayerName;
+		public Label Map;
 		public Label Deaths;
 		public Label Ping;
 
@@ -44,7 +39,6 @@ namespace LASU.UI
 			PlayerName.Text = Client.Name;
 			Deaths.Text = Client.GetInt("deaths").ToString();
 			Ping.Text = Client.Ping.ToString();
-			SetClass("me", Client == Game.LocalClient);
 		}
 
 		public virtual void UpdateFrom(IClient client) 

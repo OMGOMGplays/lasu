@@ -1,7 +1,4 @@
-﻿using Sandbox;
-using System.Linq;
-
-namespace LASU 
+﻿namespace LASU 
 {
 	public partial class LASUPlayer : Player 
 	{

@@ -1,9 +1,3 @@
-using Sandbox;
-using Sandbox.UI;
-using Sandbox.UI.Construct;
-using System.Linq;
-using System.Collections.Generic;
-
 namespace LASU.UI
 {
 	public partial class LASUScoreboard<T> : Panel where T : LASUScoreboardEntry, new()
@@ -12,6 +6,7 @@ namespace LASU.UI
 		Dictionary<IClient, T> Rows = new ();
 
 		public Panel Header {get; protected set;}
+		public Panel Footer {get; protected set;}
 
 		public LASUScoreboard() 
 		{

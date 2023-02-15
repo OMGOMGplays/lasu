@@ -1,8 +1,4 @@
-﻿using Sandbox;
-using System;
-using System.Linq;
-
-using LASU.UI;
+﻿using LASU.UI;
 
 namespace LASU
 {
@@ -12,9 +8,8 @@ namespace LASU
 		[Net] public GameStates CurrGameState {get; set;} = GameStates.WaitingForPlayers;
 
 		// TimeUntil
-		public static float TimeUntilStartOrigin = 15.0f; // Kommer detta vara användbart? Kanske ifall jag lyckas få inställningarna fungera.
-
-		[Net] public float TimeUntilStart {get; set;} = 15.0f;
+		private const float TimeUntilStartOrigin = 15.0f; // Kommer detta vara användbart? Kanske ifall jag lyckas få inställningarna fungera.
+		[Net] public float TimeUntilStart {get; set;} = TimeUntilStartOrigin;
 		[Net] public float TimeUntilSwitchToMapVote {get; set;} = 45.0f;
 		[Net] public float TimeUntilSwitchMap {get; set;} = 50.0f;
 
@@ -24,15 +19,20 @@ namespace LASU
 		public TimeSince TimeSinceRoundEnded;
 
 		// Rounds
+		private const int MaxRoundOrigin = 4;
+		public int MaxRound = MaxRoundOrigin;
 		[Net] public int CurrentRound {get; set;} = 0;
-		public int MaxRound = 4;
 
 		// Players
-		[Net] public int AmountOfPlayers {get; set;}
 		private int MinAmountOfPlayers = 2;
+		[Net] public int AmountOfPlayers {get; set;}
 		[Net] public int PlayersLeft {get; set;}
 
+		// Misc.
 		public static LASUGame Instance => Current as LASUGame;
+
+		public string CurrMap {get; set;}
+		public string MapIdent {get; set;}
 
 		public LASUGame() 
 		{
@@ -104,7 +104,7 @@ namespace LASU
 
 			if (CurrGameState == GameStates.Ongoing) 
 			{
-				if (PlayersLeft == 0 || PlayersLeft == 1) 
+				if (PlayersLeft <= 1) 
 				{
 					if (CurrentRound < MaxRound) 
 					{
@@ -128,11 +128,8 @@ namespace LASU
 
 				// Log.Info($"Switching to map vote in {TimeUntilSwitchToMapVote} seconds!");
 
-				ShowScoreboard();
-
 				if (TimeUntilSwitchToMapVote <= 0.0f) 
 				{
-					CloseScoreboard();
 					SetGameState(GameStates.MapVoting);
 				}
 			}
@@ -151,8 +148,6 @@ namespace LASU
 					// Ändra banan
 					return;
 				}
-
-				OpenMapSwitchMenu();
 			}
 
 			if (!CheckMinPlayerReached()) 
@@ -178,6 +173,16 @@ namespace LASU
 			Log.Info($"The game state will now switch to: {nextGS}.");
 			CurrGameState = nextGS;
 			return;
+		}
+
+		public async void GetCurrentMapString() 
+		{
+			if (string.IsNullOrEmpty(MapIdent)) return;
+
+			var pkg = await Package.FetchAsync(MapIdent, true);
+			if (pkg == null) return;
+
+			CurrMap = MapIdent;
 		}
 
 		public bool CheckMinPlayerReached() 
@@ -232,27 +237,6 @@ namespace LASU
 				
 				TimeSinceResetPlayers = 0;
 			}
-		}
-
-		public void ShowScoreboard() 
-		{
-			// Gör saker här när det behövs.
-
-			return;
-		}
-
-		public void CloseScoreboard() 
-		{
-			// Samma här.
-
-			return;
-		}
-
-		public void OpenMapSwitchMenu() 
-		{
-			// Du vet vad som gäller här också.
-
-			return;
 		}
 
 		public enum GameStates 

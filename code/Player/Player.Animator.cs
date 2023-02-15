@@ -1,5 +1,3 @@
-using Sandbox;
-
 namespace LASU 
 {
 	public partial class LASUPlayer 

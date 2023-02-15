@@ -1,29 +1,13 @@
-using Sandbox;
-
 namespace LASU
 {
 	public partial class LASUGame 
 	{
-		[ConCmd.Client("lasu_restartround")]
-		public static void RestartRound() 
-		{
-			Instance.SetGameState(GameStates.WaitingForPlayers);
-			Instance.ResetPlayers();
-		}
+		// Server Settings
 
-		[ConCmd.Client("lasu_forcestartround")]
-		public static void ForceStart() 
-		{
-			if (Instance.CurrGameState == GameStates.WaitingForPlayers)
-			{
-				Instance.SetGameState(GameStates.Starting);
-			}
-		}
+		[ConVar.Replicated("lasu_setstartorigin")]
+		public static float SetStartingOrigin {get; set;} = TimeUntilStartOrigin;
 
-		[ConCmd.Client("lasu_resetprops")]
-		public static void ResetPropsCommand() 
-		{
-			Instance.ResetProps();
-		}
+		[ConVar.Replicated("lasu_roundsuntilover")]
+		public static int SetRoundsTillOver {get; set;} = MaxRoundOrigin;
 	}
 }
