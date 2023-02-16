@@ -57,17 +57,17 @@ namespace LASU
 
 			await Task.Delay(3000);
 
-			LASUCmd_ChangeMap(mapIdent);
+			ChangeMap(mapIdent);
 		}
 
 		[ConCmd.Server]
-		public static void LASUCmd_ChangeMap(string mapIdent) 
+		public static void ChangeMap(string mapIdent) 
 		{
 			Game.ChangeLevel(mapIdent);
 		}
 
 		[ConCmd.Server]
-		public static void LASUCmd_SetMapVote(string mapIdent) 
+		public static void SetMapVote(string mapIdent) 
 		{
 			if (!ConsoleSystem.Caller.IsValid()) return;
 

@@ -23,10 +23,6 @@ namespace LASU.UI
 			{
 				SetClass("hidden", true);
 			}
-			else 
-			{
-				SetClass("hidden", false);
-			}
 
 			Round = game.CurrentRound;
 			RoundText.Text = $"Round {Round}";

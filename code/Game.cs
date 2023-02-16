@@ -36,9 +36,13 @@ namespace LASU
 
 		public LASUGame() 
 		{
+			if (Game.IsClient) 
+			{
+				new LASUHud();
+			}
 			if (Game.IsServer) 
 			{
-				_ = new LASUHud();
+				InitMapCycle();
 			}
 		}
 
@@ -145,8 +149,16 @@ namespace LASU
 
 				if (TimeUntilSwitchMap <= 0.0f) 
 				{
-					// Ändra banan
-					return;
+					if (NextMap != null)
+					{
+						ChangeMap(NextMap);
+						return;
+					}
+					else 
+					{
+						Log.Error("Vote on a map!");
+						TimeUntilSwitchMap = 50.0f;
+					}
 				}
 			}
 
@@ -173,16 +185,6 @@ namespace LASU
 			Log.Info($"The game state will now switch to: {nextGS}.");
 			CurrGameState = nextGS;
 			return;
-		}
-
-		public async void GetCurrentMapString() 
-		{
-			if (string.IsNullOrEmpty(MapIdent)) return;
-
-			var pkg = await Package.FetchAsync(MapIdent, true);
-			if (pkg == null) return;
-
-			CurrMap = MapIdent;
 		}
 
 		public bool CheckMinPlayerReached() 

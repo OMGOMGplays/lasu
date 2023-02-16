@@ -16,9 +16,9 @@
     "MaxPlayers": 64,
     "MinPlayers": 1,
     "GameNetworkType": "Multiplayer",
-    "MapSelect": "Unrestricted",
+    "MapSelect": "Tagged",
     "MapList": [
-      "facepunch.flatgrass"
+      "oop.lasu_1"
     ],
     "RankType": "Best",
     "PerMapRanking": false,
@@ -114,6 +114,7 @@
     },
     "GeneralExtensions": false,
     "TargettedExtensions": true,
-    "ExtensionApiVersion": 1001
+    "ExtensionApiVersion": 1001,
+    "CsProjName": ""
   }
 }

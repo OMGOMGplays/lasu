@@ -21,8 +21,8 @@ namespace LASU
 
 			SetupPhysics();
 
-			SpawnPosition = Position;
-			SpawnRotation = Rotation;
+			SpawnPosition = LocalPosition;
+			SpawnRotation = LocalRotation;
 		}
 
 		private void SetupPhysics()

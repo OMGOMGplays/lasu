@@ -5,7 +5,6 @@ namespace LASU.UI
 		public IClient Client;
 
 		public Label PlayerName;
-		public Label Map;
 		public Label Deaths;
 		public Label Ping;
 

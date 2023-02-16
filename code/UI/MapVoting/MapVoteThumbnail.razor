@@ -1,4 +1,5 @@
 @inherits Panel
+@attribute [StyleSheet("ui/mapvoting/MapVoteScreen.scss")]
 @namespace LASU.UI
 @using LASU
 
@@ -30,7 +31,7 @@
     {
         base.OnClick( e );
 
-        LASU.LASUGame.LASUCmd_SetMapVote(MapIdent);
+        LASU.LASUGame.SetMapVote(MapIdent);
     }
 	
     private async void LoadThumbnail() 
