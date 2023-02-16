@@ -14,7 +14,7 @@
   "CodePath": "/code/",
   "Metadata": {
     "MaxPlayers": 64,
-    "MinPlayers": 1,
+    "MinPlayers": 2,
     "GameNetworkType": "Multiplayer",
     "MapSelect": "Tagged",
     "MapList": [
@@ -62,9 +62,9 @@
     "DefaultLeaderboards": [
       "Longest Survived Time"
     ],
-    "Summary": "",
-    "Description": "",
-    "Public": false,
+    "Summary": "Survive for as long as possible atop a flimsy structure while being bombarded by huge objects!",
+    "Description": "This gamemode is all about surviving for as long as possible against a huge bombardment of giant objects. Be the last one standing!\n\nTODO:\nWin system\nChat\nFix misc. bugs / errors\nMake more maps\n\nCredit:\nLokiv - Programmer, lead dev\nLeKirbo - Logo for the gamemode\nPatrickJr. - UI enhancements",
+    "Public": true,
     "Physics": {
       "SubSteps": 1,
       "TimeScale": 1,
@@ -115,6 +115,7 @@
     "GeneralExtensions": false,
     "TargettedExtensions": true,
     "ExtensionApiVersion": 1001,
-    "CsProjName": ""
+    "CsProjName": "",
+    "ReplaceTags": ""
   }
 }
